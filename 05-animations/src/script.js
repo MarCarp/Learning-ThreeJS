@@ -29,12 +29,16 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
-let num = 0
+
+let time = Date.now()
+
 const loop = () => {
-    num += 0.01
-    mesh.position.x = Math.sin(num)
-    mesh.rotation.y = num
-    console.log(mesh.position)
+    const currentTime = Date.now();
+    const deltaTime = currentTime - time
+    
+    time = currentTime
+    mesh.position.x += Math.sin(deltaTime * 0.01)
+    mesh.rotation.y += deltaTime * 0.01
     renderer.render(scene, camera)
     window.requestAnimationFrame(loop)
 }
