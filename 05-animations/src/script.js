@@ -30,15 +30,12 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
 
-let time = Date.now()
+let clock = new THREE.Clock()
 
 const loop = () => {
-    const currentTime = Date.now();
-    const deltaTime = currentTime - time
-    
-    time = currentTime
-    mesh.position.x += Math.sin(deltaTime * 0.01)
-    mesh.rotation.y += deltaTime * 0.01
+    camera.position.x = Math.sin(clock.getElapsedTime() * 1)
+    camera.position.y = Math.cos(clock.getElapsedTime() * 1)
+    camera.lookAt(mesh.position)
     renderer.render(scene, camera)
     window.requestAnimationFrame(loop)
 }
