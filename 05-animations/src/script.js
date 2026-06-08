@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import gsap from 'gsap'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -32,10 +33,14 @@ renderer.render(scene, camera)
 
 let clock = new THREE.Clock()
 
+gsap.to(mesh.position, {x: 2, duration:3, delay:1})
+gsap.to(mesh.position, {x: -1, duration:1, delay: 4})
+
+
 const loop = () => {
-    camera.position.x = Math.sin(clock.getElapsedTime() * 1)
-    camera.position.y = Math.cos(clock.getElapsedTime() * 1)
-    camera.lookAt(mesh.position)
+    // camera.position.x = Math.sin(clock.getElapsedTime() * 1)
+    // camera.position.y = Math.cos(clock.getElapsedTime() * 1)
+    // camera.lookAt(mesh.position)
     renderer.render(scene, camera)
     window.requestAnimationFrame(loop)
 }
