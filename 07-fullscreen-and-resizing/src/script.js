@@ -77,4 +77,13 @@ window.addEventListener('resize', ()=>{
     renderer.setSize(sizes.width, sizes.height)
 })
 
+window.addEventListener('dblclick', ()=>{
+    if(!document.fullscreenElement) {
+        canvas.requestFullscreen()
+    } else {
+        document.exitFullscreen()
+    }
+})
+
+
 tick()
