@@ -6,6 +6,10 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// Helpers
+const axesHelper = new THREE.AxesHelper(2)
+scene.add(axesHelper)
+
 /**
  * Objects
  */
@@ -27,6 +31,8 @@ const sizes = {
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 3
+camera.position.y = 1
+camera.position.x = 1
 scene.add(camera)
 
 /**
