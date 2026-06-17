@@ -15,6 +15,8 @@ const sizes = {
     height: 600
 }
 
+const aspectRatio = sizes.width / sizes.height
+
 // Scene
 const scene = new THREE.Scene()
 
@@ -22,20 +24,21 @@ const scene = new THREE.Scene()
 
 // Object
 const mesh = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1, 5, 5, 5),
-    new THREE.MeshBasicMaterial({ color: 0xff0000 })
+    new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
 )
 scene.add(mesh)
 
 // Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
-camera.position.x = 2
-camera.position.y = 2
-camera.position.z = 2
+// const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)w
+const orthoCam = new THREE.OrthographicCamera(-aspectRatio, aspectRatio, 1, -1)
+orthoCam.position.x = 2
+orthoCam.position.y = 2
+orthoCam.position.z = 2
 // Control
-const control = new OrbitControls(camera, canvas);
+const control = new OrbitControls(orthoCam, canvas);
 control.enableDamping = true
-scene.add(camera)
+scene.add(orthoCam)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -55,7 +58,7 @@ const tick = () =>
     // mesh.rotation.y = elapsedTime;
 
     // Render
-    renderer.render(scene, camera)
+    renderer.render(scene, orthoCam)
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
